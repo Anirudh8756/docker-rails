@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  web:
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    env_file: .env
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'    
+    volumes:
+      - .:/app
+      - bundle-volume:/usr/local/bundle
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+        
+    ports:
+      - "3000:3000"
+      
+volumes:
+ bundle-volume:
